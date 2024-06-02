@@ -1,0 +1,109 @@
+{
+  "name": "npm-run-script",
+  "displayName": "npm-run-script",
+  "description": "vscode run npm run *** quick",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.89.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamcoderloser/npm-run-script.git"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "configuration":{
+      "title": "Npm run script",
+      "properties": {
+        "terminal.single":{
+          "type":"boolean",
+          "description": "是否使用同一个终端（是：只会用一个终端运行命令，否：每个命令都会打开一个终端）",
+          "default":false
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "npm-run-script.refresh",
+        "title": "nrs-refresh",
+        "shortTitle": "nrs-refresh",
+        "icon":"./resources/imgs/refresh.png"
+      },
+      {
+        "command": "npm-run-script.refresh-scm",
+        "title": "nrs-refresh-scm",
+        "icon":"./resources/imgs/refresh.png"
+      },
+      {
+        "command": "npm-run-script.update-comment",
+        "title": "nrs-update-comment",
+        "icon":"./resources/imgs/edit.png",
+        "shortTitle": ""
+      },
+      {
+        "command": "npm-run-script.runscript",
+        "title": "nrs-runscript",
+        "shortTitle": ""
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "npmrunscript",
+          "name": "npm run script"
+        }
+      ],
+      "scm": [
+        {
+          "id": "npmrunscript-scm",
+          "name": "npm run script"
+        }      
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "npm-run-script.refresh",
+          "when": "view == npmrunscript",
+          "group": "navigation"
+        },
+        {
+          "command": "npm-run-script.refresh-scm",
+          "when": "view == npmrunscript-scm",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "npm-run-script.update-comment",
+          "when": "view == npmrunscript",
+          "group": "inline"
+        },
+        {
+          "command": "npm-run-script.update-comment",
+          "when": "view == npmrunscript-scm",
+          "group": "inline"
+        }
+      ]
+    }
+  },
+  
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.89.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.3.9"
+  }
+}
