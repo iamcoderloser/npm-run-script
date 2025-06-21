@@ -9,10 +9,12 @@ const disposes = require('./registerCommand.js')
 const provides = require('./registerProvider.js')
 
 
-const rootPath =
+const workspaceFolders =
   vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0
-    ? vscode.workspace.workspaceFolders[0].uri.fsPath
-    : undefined;
+    ? vscode.workspace.workspaceFolders
+		: undefined;
+// 判断是否是单项目，还是workspace
+const rootPath = workspaceFolders ? workspaceFolders.length == 1 ? workspaceFolders[0].uri.fsPath : workspaceFolders.map(wf => wf.uri.fsPath) : undefined;
 
 /**
  * @param {vscode.ExtensionContext} context

@@ -23,7 +23,7 @@ disposable = vscode.commands.registerCommand('npm-run-script.update-comment', fu
   const label = args.key ? args.key : args.command.arguments[0]
   
   if(!label) return
-  const packageJson = getPackageJson(rootPath)
+  const packageJson = getPackageJson(args.rootPath)
   const { scripts, scriptsWithComment } = packageJson
   const value = scriptsWithComment ?  scriptsWithComment[label]?.desc || '' : '' 
 
@@ -43,7 +43,7 @@ disposable = vscode.commands.registerCommand('npm-run-script.update-comment', fu
         }
       }
     }
-    savePackageJson(rootPath, packageJson)
+    savePackageJson(args.rootPath, packageJson)
     
     vscode.commands.executeCommand('npm-run-script.refresh','npm-run-script.refresh-scm')
 
